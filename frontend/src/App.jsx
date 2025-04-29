@@ -3,6 +3,8 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
 
+const API_URL = import.meta.env.VITE_API_URL || '/api';
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +18,7 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/todos');
+      const response = await fetch(`${API_URL}/todos`);
       if (!response.ok) {
         throw new Error('Failed to fetch todos');
       }
@@ -32,7 +34,7 @@ function App() {
 
   const addTodo = async (text) => {
     try {
-      const response = await fetch('/api/todos', {
+      const response = await fetch(`${API_URL}/todos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
@@ -52,7 +54,7 @@ function App() {
 
   const toggleTodo = async (id) => {
     try {
-      const response = await fetch(`/api/todos/${id}`, {
+      const response = await fetch(`${API_URL}/todos/${id}`, {
         method: 'PUT',
       });
       
@@ -74,7 +76,7 @@ function App() {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await fetch(`/api/todos/${id}`, {
+      const response = await fetch(`${API_URL}/todos/${id}`, {
         method: 'DELETE',
       });
       
