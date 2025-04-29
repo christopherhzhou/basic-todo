@@ -13,9 +13,6 @@ RUN npm ci --only=production
 # Copy the rest of the application code
 COPY . .
 
-# Copy the .env file
-COPY .env .env
-
 # Set NODE_ENV to production
 ENV NODE_ENV=production
 
